@@ -2,7 +2,8 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 
-import Menu
+import Navigation
+import Header
 
 main : Program Never Model Msg
 main =
@@ -95,7 +96,11 @@ viewArticle a =
 view : Model -> Html Msg
 view model =
     div []
-        [ Menu.viewMenu
-          
-        , div [] (List.map viewArticle model.articles)
+        [ Navigation.viewNavigation
+        , div
+            [ class "container" ]
+            [
+              Header.viewHeader
+            , div [] (List.map viewArticle model.articles)
+            ]
         ]

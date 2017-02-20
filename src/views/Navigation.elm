@@ -1,10 +1,10 @@
-module Menu exposing (..)
+module Navigation exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
-viewMenu : Html msg
-viewMenu =
+viewNavigation : Html msg
+viewNavigation =
   div
     [ class "blog-masthead" ]
     [ div

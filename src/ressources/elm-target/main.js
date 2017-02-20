@@ -8264,6 +8264,45 @@ var _user$project$Header$viewHeader = A2(
 	_elm_lang$html$Html$div,
 	{
 		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('blog-header'),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$h1,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('blog-title'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('The Bootstrap Blog'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$p,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('lead blog-description'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('The official example template of creating a blog with Bootstrap.'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		}
+	});
+
+var _user$project$Navigation$viewNavigation = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
 		_0: _elm_lang$html$Html_Attributes$class('blog-masthead'),
 		_1: {ctor: '[]'}
 	},
@@ -8491,13 +8530,28 @@ var _user$project$Main$view = function (model) {
 		{ctor: '[]'},
 		{
 			ctor: '::',
-			_0: _user$project$Header$viewHeader,
+			_0: _user$project$Navigation$viewNavigation,
 			_1: {
 				ctor: '::',
 				_0: A2(
 					_elm_lang$html$Html$div,
-					{ctor: '[]'},
-					A2(_elm_lang$core$List$map, _user$project$Main$viewArticle, model.articles)),
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('container'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _user$project$Header$viewHeader,
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{ctor: '[]'},
+								A2(_elm_lang$core$List$map, _user$project$Main$viewArticle, model.articles)),
+							_1: {ctor: '[]'}
+						}
+					}),
 				_1: {ctor: '[]'}
 			}
 		});
