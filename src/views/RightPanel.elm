@@ -2,8 +2,11 @@ module RightPanel exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 
 import Msg exposing (..)
+import Article exposing (..)
+import Model exposing (..)
 
 viewAbout : Html msg
 viewAbout =
@@ -14,12 +17,8 @@ viewAbout =
       [ text "About" ]
     , p
       []
-      [ text "Etiam porta"
-      , em
-        []
-        [ text "sem malesuada magna" ]
-        , text "mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur."
-      ]
+      [ text
+            "Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur." ]
     ]
 
 viewLi : ( String, String ) -> Html Msg
@@ -31,26 +30,33 @@ viewLi (h, t) =
       [ text t ]
     ]
 
-viewSideBar : Html Msg
-viewSideBar =
-  let
-    lis =
-      [
-        ("#", "March 2014")
-      , ("#", "February 2014")
-      , ("#", "January 2014")
-      , ("#", "December 2013")
-      , ("#", "November 2013")]
-  in
-    div
-      [ class "sidebar-module" ]
-      [ h4
-        []
-        [ text "Archives" ]
-      , ol
-        [ class "list-unstyled" ]
-        (List.map viewLi lis)
-      ]
+
+viewArticleList : (List Article, Article) -> Html Msg
+viewArticleList (articles, current) =
+    let
+        emphasizeIfCurrent m =
+            let
+                a = text (m.date ++ " - " ++ m.title)
+            in if m == current then (b [] [a]) else a
+
+        articleDateAndTitleListLi : Article -> Html Msg
+        articleDateAndTitleListLi article =
+            li
+                []
+                [ a
+                      [ onClick (Clicked article) ]
+                      [ emphasizeIfCurrent article ]
+                ]
+    in
+        div
+          [ class "sidebar-module" ]
+          [ h4
+            []
+            [ text "Articles" ]
+          , ol
+            [ class "list-unstyled" ]
+            (List.map articleDateAndTitleListLi articles)
+          ]
 
 viewContact : Html Msg
 viewContact =
@@ -64,12 +70,12 @@ viewContact =
       (List.map viewLi [("#", "Twitter"), ("#", "GitHub")])
     ]
 
-viewRightPanel : Html Msg
-viewRightPanel =
+viewRightPanel : Model -> Html Msg
+viewRightPanel m =
   div
     [ class "col-sm-3 col-sm-offset-1 blog-sidebar" ]
     [
       viewAbout
-    , viewSideBar
+    , viewArticleList (m.articles, m.currentArticle)
     , viewContact
     ]

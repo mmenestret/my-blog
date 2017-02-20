@@ -4,4 +4,6 @@ import Article exposing (..)
 
 type Msg
     = NoOp
-    | ToggleContent Article
+    | Clicked Article
+    | Previous Article
+    | Next Article

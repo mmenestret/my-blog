@@ -3,7 +3,6 @@ import Html.Attributes exposing (..)
 
 -- Types
 import Model exposing (..)
-import Article exposing (..)
 import Msg exposing (..)
 
 -- Views
@@ -22,19 +21,13 @@ main =
         , subscriptions = subscriptions
         }
 
-
-
 -- MODEL
 
 initialModel : Model
 initialModel =
-    Model "Geekocephale"
-    [ Article "Article 1" "Lorem Ipsum 1" False "15/01/2017"
-    , Article "Article 2" "Lorem Ipsum 2" False "15/01/2017"
-    , Article "Article 3" "Lorem Ipsum 3" False "15/01/2017"
-    , Article "Article 4" "Lorem Ipsum 4" False "15/01/2017"
-    ]
-
+    { articles = Articles.getArticles
+    , currentArticle = Articles.lastArticle
+    }
 
 
 init : ( Model, Cmd Msg )
@@ -51,14 +44,20 @@ update msg model =
         NoOp ->
             ( model, Cmd.none )
 
-        ToggleContent a ->
-            let
-              newArticles =
-                (List.map
-                (\x -> if x == a then { x | showContent = not x.showContent } else x)
-                model.articles)
-            in ( { model | articles = newArticles }, Cmd.none )
+        Clicked a ->
+            (
+                { model | currentArticle = a }
+            ,   Cmd.none )
 
+        Previous a ->
+            (
+                { model | currentArticle = Articles.previous(a) }
+            ,   Cmd.none )
+
+        Next a ->
+            (
+                { model | currentArticle = Articles.next(a) }
+            ,   Cmd.none )
 
 -- SUBSCRIPTIONS
 
@@ -79,8 +78,8 @@ view model =
             [ Header.viewHeader
             , div
                 [ class "row" ]
-                [ Articles.viewArticles model
-                , RightPanel.viewRightPanel
+                [ Articles.viewArticle model.currentArticle
+                , RightPanel.viewRightPanel model
                 ]
             ]
         , Footer.viewFooter
