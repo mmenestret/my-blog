@@ -1,10 +1,10 @@
-module Header exposing (..)
+module Menu exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
-viewHeader : Html msg
-viewHeader =
+viewMenu : Html msg
+viewMenu =
   div
     [ class "blog-masthead" ]
     [ div
