@@ -1,9 +1,15 @@
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onClick)
 
+-- Types
+import Model exposing (..)
+import Article exposing (..)
+import Msgs exposing (..)
+
+-- Views
 import Navigation
 import Header
+import Articles
 
 main : Program Never Model Msg
 main =
@@ -17,21 +23,6 @@ main =
 
 
 -- MODEL
-
-type alias Title = String
-type alias Article =
-    { title: Title
-    , content: String
-    , showContent: Bool
-    , date: String
-    }
-
-type alias Model =
-    { blogTitle: Title
-    , articles: List Article
-    }
-
-
 
 initialModel : Model
 initialModel =
@@ -51,12 +42,6 @@ init =
 
 
 -- UPDATE
-
-
-type Msg
-    = NoOp
-    | ToggleContent Article
-
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -81,17 +66,7 @@ subscriptions model =
     Sub.none
 
 
-
 -- VIEW
-viewArticle : Article -> Html Msg
-viewArticle a =
-    article
-        [ onClick (ToggleContent a) ]
-        [ h2 [] [ text ( a.title ++ " ... " ++ a.date )]
-        , div
-            [ hidden (not a.showContent) ]
-            [ text a.content ]
-        ]
 
 view : Model -> Html Msg
 view model =
@@ -99,8 +74,11 @@ view model =
         [ Navigation.viewNavigation
         , div
             [ class "container" ]
-            [
-              Header.viewHeader
-            , div [] (List.map viewArticle model.articles)
+            [ Header.viewHeader
+            , div
+                [ class "row" ]
+                [ Articles.viewArticles model
+                , 
+                ]
             ]
         ]

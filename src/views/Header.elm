@@ -3,7 +3,9 @@ module Header exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
-viewHeader : Html msg
+import Msgs exposing (..)
+
+viewHeader : Html Msg
 viewHeader =
   div
   [ class "blog-header" ]

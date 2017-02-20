@@ -3,7 +3,9 @@ module Navigation exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
-viewNavigation : Html msg
+import Msgs exposing (..)
+
+viewNavigation : Html Msg
 viewNavigation =
   div
     [ class "blog-masthead" ]

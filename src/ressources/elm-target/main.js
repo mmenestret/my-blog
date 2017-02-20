@@ -8260,6 +8260,73 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
+var _user$project$Article$Article = F4(
+	function (a, b, c, d) {
+		return {title: a, content: b, showContent: c, date: d};
+	});
+
+var _user$project$Model$Model = F2(
+	function (a, b) {
+		return {blogTitle: a, articles: b};
+	});
+
+var _user$project$Msgs$ToggleContent = function (a) {
+	return {ctor: 'ToggleContent', _0: a};
+};
+var _user$project$Msgs$NoOp = {ctor: 'NoOp'};
+
+var _user$project$Articles$viewArticle = function (a) {
+	return A2(
+		_elm_lang$html$Html$article,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Events$onClick(
+				_user$project$Msgs$ToggleContent(a)),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h2,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							a.title,
+							A2(_elm_lang$core$Basics_ops['++'], ' ... ', a.date))),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$hidden(!a.showContent),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(a.content),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Articles$viewArticles = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('col-sm-8 blog-main'),
+			_1: {ctor: '[]'}
+		},
+		A2(_elm_lang$core$List$map, _user$project$Articles$viewArticle, model.articles));
+};
+
 var _user$project$Header$viewHeader = A2(
 	_elm_lang$html$Html$div,
 	{
@@ -8425,6 +8492,46 @@ var _user$project$Navigation$viewNavigation = A2(
 		_1: {ctor: '[]'}
 	});
 
+var _user$project$Main$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _user$project$Navigation$viewNavigation,
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('container'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _user$project$Header$viewHeader,
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('row'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _user$project$Articles$viewArticles(model),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
 var _user$project$Main$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$none;
 };
@@ -8451,114 +8558,29 @@ var _user$project$Main$update = F2(
 			};
 		}
 	});
-var _user$project$Main$Article = F4(
-	function (a, b, c, d) {
-		return {title: a, content: b, showContent: c, date: d};
-	});
-var _user$project$Main$Model = F2(
-	function (a, b) {
-		return {blogTitle: a, articles: b};
-	});
 var _user$project$Main$initialModel = A2(
-	_user$project$Main$Model,
+	_user$project$Model$Model,
 	'Geekocephale',
 	{
 		ctor: '::',
-		_0: A4(_user$project$Main$Article, 'Article 1', 'Lorem Ipsum 1', false, '15/01/2017'),
+		_0: A4(_user$project$Article$Article, 'Article 1', 'Lorem Ipsum 1', false, '15/01/2017'),
 		_1: {
 			ctor: '::',
-			_0: A4(_user$project$Main$Article, 'Article 2', 'Lorem Ipsum 2', false, '15/01/2017'),
+			_0: A4(_user$project$Article$Article, 'Article 2', 'Lorem Ipsum 2', false, '15/01/2017'),
 			_1: {
 				ctor: '::',
-				_0: A4(_user$project$Main$Article, 'Article 3', 'Lorem Ipsum 3', false, '15/01/2017'),
+				_0: A4(_user$project$Article$Article, 'Article 3', 'Lorem Ipsum 3', false, '15/01/2017'),
 				_1: {
 					ctor: '::',
-					_0: A4(_user$project$Main$Article, 'Article 4', 'Lorem Ipsum 4', false, '15/01/2017'),
+					_0: A4(_user$project$Article$Article, 'Article 4', 'Lorem Ipsum 4', false, '15/01/2017'),
 					_1: {ctor: '[]'}
 				}
 			}
 		}
 	});
 var _user$project$Main$init = {ctor: '_Tuple2', _0: _user$project$Main$initialModel, _1: _elm_lang$core$Platform_Cmd$none};
-var _user$project$Main$ToggleContent = function (a) {
-	return {ctor: 'ToggleContent', _0: a};
-};
-var _user$project$Main$viewArticle = function (a) {
-	return A2(
-		_elm_lang$html$Html$article,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Events$onClick(
-				_user$project$Main$ToggleContent(a)),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$h2,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(
-						A2(
-							_elm_lang$core$Basics_ops['++'],
-							a.title,
-							A2(_elm_lang$core$Basics_ops['++'], ' ... ', a.date))),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$hidden(!a.showContent),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(a.content),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
-var _user$project$Main$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: _user$project$Navigation$viewNavigation,
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('container'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _user$project$Header$viewHeader,
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$div,
-								{ctor: '[]'},
-								A2(_elm_lang$core$List$map, _user$project$Main$viewArticle, model.articles)),
-							_1: {ctor: '[]'}
-						}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
 var _user$project$Main$main = _elm_lang$html$Html$program(
 	{init: _user$project$Main$init, view: _user$project$Main$view, update: _user$project$Main$update, subscriptions: _user$project$Main$subscriptions})();
-var _user$project$Main$NoOp = {ctor: 'NoOp'};
 
 var Elm = {};
 Elm['Main'] = Elm['Main'] || {};
