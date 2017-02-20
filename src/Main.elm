@@ -4,7 +4,7 @@ import Html.Attributes exposing (..)
 -- Types
 import Model exposing (..)
 import Article exposing (..)
-import Msgs exposing (..)
+import Msg exposing (..)
 
 -- Views
 import Navigation
@@ -78,7 +78,6 @@ view model =
             , div
                 [ class "row" ]
                 [ Articles.viewArticles model
-                , 
                 ]
             ]
         ]

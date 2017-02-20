@@ -1,4 +1,4 @@
-module Msgs exposing (..)
+module Msg exposing (..)
 
 import Article exposing (..)
 
