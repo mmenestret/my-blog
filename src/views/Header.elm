@@ -3,7 +3,7 @@ module Header exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
-import Msgs exposing (..)
+import Msg exposing (..)
 
 viewHeader : Html Msg
 viewHeader =

@@ -10,6 +10,8 @@ import Msg exposing (..)
 import Navigation
 import Header
 import Articles
+import RightPanel
+import Footer
 
 main : Program Never Model Msg
 main =
@@ -78,6 +80,8 @@ view model =
             , div
                 [ class "row" ]
                 [ Articles.viewArticles model
+                , RightPanel.viewRightPanel
                 ]
             ]
+        , Footer.viewFooter
         ]

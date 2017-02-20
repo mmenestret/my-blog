@@ -8270,49 +8270,59 @@ var _user$project$Model$Model = F2(
 		return {blogTitle: a, articles: b};
 	});
 
-var _user$project$Msgs$ToggleContent = function (a) {
+var _user$project$Msg$ToggleContent = function (a) {
 	return {ctor: 'ToggleContent', _0: a};
 };
-var _user$project$Msgs$NoOp = {ctor: 'NoOp'};
+var _user$project$Msg$NoOp = {ctor: 'NoOp'};
 
 var _user$project$Articles$viewArticle = function (a) {
 	return A2(
-		_elm_lang$html$Html$article,
+		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Events$onClick(
-				_user$project$Msgs$ToggleContent(a)),
+			_0: _elm_lang$html$Html_Attributes$class('blog-post'),
 			_1: {ctor: '[]'}
 		},
 		{
 			ctor: '::',
 			_0: A2(
 				_elm_lang$html$Html$h2,
-				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text(
-						A2(
-							_elm_lang$core$Basics_ops['++'],
-							a.title,
-							A2(_elm_lang$core$Basics_ops['++'], ' ... ', a.date))),
+					_0: _elm_lang$html$Html_Attributes$class('blog-post-title'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(a.title),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$div,
+					_elm_lang$html$Html$p,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$hidden(!a.showContent),
+						_0: _elm_lang$html$Html_Attributes$class('blog-post-meta'),
 						_1: {ctor: '[]'}
 					},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text(a.content),
+						_0: _elm_lang$html$Html$text(a.date),
 						_1: {ctor: '[]'}
 					}),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(a.content),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 };
@@ -8326,6 +8336,86 @@ var _user$project$Articles$viewArticles = function (model) {
 		},
 		A2(_elm_lang$core$List$map, _user$project$Articles$viewArticle, model.articles));
 };
+
+var _user$project$Footer$viewFooter = A2(
+	_elm_lang$html$Html$footer,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('blog-footer'),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$p,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('Blog template built for'),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$a,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$href('http://getbootstrap.com'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Bootstrap'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('by'),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$a,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$href('https://twitter.com/mdo'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('@mdo'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('.'),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$p,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$a,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$href('#'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Back to top'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		}
+	});
 
 var _user$project$Header$viewHeader = A2(
 	_elm_lang$html$Html$div,
@@ -8492,6 +8582,188 @@ var _user$project$Navigation$viewNavigation = A2(
 		_1: {ctor: '[]'}
 	});
 
+var _user$project$RightPanel$viewLi = function (_p0) {
+	var _p1 = _p0;
+	return A2(
+		_elm_lang$html$Html$li,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$a,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$href(_p1._0),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(_p1._1),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$RightPanel$viewSideBar = function () {
+	var lis = {
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: '#', _1: 'March 2014'},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: '#', _1: 'February 2014'},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: '#', _1: 'January 2014'},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: '#', _1: 'December 2013'},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: '#', _1: 'November 2013'},
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	};
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('sidebar-module'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h4,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Archives'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$ol,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('list-unstyled'),
+						_1: {ctor: '[]'}
+					},
+					A2(_elm_lang$core$List$map, _user$project$RightPanel$viewLi, lis)),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _user$project$RightPanel$viewContact = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('sidebar-module'),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$h4,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('Elsewhere'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$ol,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('list-unstyled'),
+					_1: {ctor: '[]'}
+				},
+				A2(
+					_elm_lang$core$List$map,
+					_user$project$RightPanel$viewLi,
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: '#', _1: 'Twitter'},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: '#', _1: 'GitHub'},
+							_1: {ctor: '[]'}
+						}
+					})),
+			_1: {ctor: '[]'}
+		}
+	});
+var _user$project$RightPanel$viewAbout = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('sidebar-module sidebar-module-inset'),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$h4,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('About'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$p,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Etiam porta'),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$em,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('sem malesuada magna'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.'),
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			_1: {ctor: '[]'}
+		}
+	});
+var _user$project$RightPanel$viewRightPanel = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('col-sm-3 col-sm-offset-1 blog-sidebar'),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: _user$project$RightPanel$viewAbout,
+		_1: {
+			ctor: '::',
+			_0: _user$project$RightPanel$viewSideBar,
+			_1: {
+				ctor: '::',
+				_0: _user$project$RightPanel$viewContact,
+				_1: {ctor: '[]'}
+			}
+		}
+	});
+
 var _user$project$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -8523,12 +8795,20 @@ var _user$project$Main$view = function (model) {
 								{
 									ctor: '::',
 									_0: _user$project$Articles$viewArticles(model),
-									_1: {ctor: '[]'}
+									_1: {
+										ctor: '::',
+										_0: _user$project$RightPanel$viewRightPanel,
+										_1: {ctor: '[]'}
+									}
 								}),
 							_1: {ctor: '[]'}
 						}
 					}),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: _user$project$Footer$viewFooter,
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 };

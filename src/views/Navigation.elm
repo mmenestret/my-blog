@@ -3,7 +3,7 @@ module Navigation exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
-import Msgs exposing (..)
+import Msg exposing (..)
 
 viewNavigation : Html Msg
 viewNavigation =
