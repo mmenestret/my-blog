@@ -8404,6 +8404,9 @@ var _user$project$Article$Article = F5(
 		return {id: a, title: b, content: c, showContent: d, date: e};
 	});
 
+var _user$project$Msg$Expand = function (a) {
+	return {ctor: 'Expand', _0: a};
+};
 var _user$project$Msg$Next = {ctor: 'Next'};
 var _user$project$Msg$Previous = {ctor: 'Previous'};
 var _user$project$Msg$Clicked = function (a) {
@@ -8411,9 +8414,9 @@ var _user$project$Msg$Clicked = function (a) {
 };
 var _user$project$Msg$NoOp = {ctor: 'NoOp'};
 
-var _user$project$Model$Model = F2(
-	function (a, b) {
-		return {articles: a, currentArticle: b};
+var _user$project$Model$Model = F3(
+	function (a, b, c) {
+		return {articles: a, currentArticle: b, fullyExpanded: c};
 	});
 
 var _user$project$Articles$pager = function (model) {
@@ -8579,7 +8582,7 @@ var _user$project$Articles$firstArticle = function (articles) {
 	return _user$project$Articles$topArticle(
 		_user$project$Articles$articlesAsc(articles));
 };
-var _user$project$Articles$previousArticle = F2(
+var _user$project$Articles$nextArticle = F2(
 	function (articles, a) {
 		return A2(
 			_elm_lang$core$Maybe$withDefault,
@@ -8598,7 +8601,7 @@ var _user$project$Articles$lastArticle = function (articles) {
 	return _user$project$Articles$topArticle(
 		_user$project$Articles$articlesDesc(articles));
 };
-var _user$project$Articles$nextArticle = F2(
+var _user$project$Articles$previousArticle = F2(
 	function (articles, a) {
 		return A2(
 			_elm_lang$core$Maybe$withDefault,
@@ -8617,7 +8620,31 @@ var _user$project$Articles$getArticles = {
 			_1: {
 				ctor: '::',
 				_0: A5(_user$project$Article$Article, 3, 'Article 4', 'Lorem Ipsum 4', false, '15/01/2017'),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: A5(_user$project$Article$Article, 4, 'Article 5', 'Lorem Ipsum 5', false, '15/01/2017'),
+					_1: {
+						ctor: '::',
+						_0: A5(_user$project$Article$Article, 5, 'Article 6', 'Lorem Ipsum 6', false, '15/01/2017'),
+						_1: {
+							ctor: '::',
+							_0: A5(_user$project$Article$Article, 6, 'Article 7', 'Lorem Ipsum 7', false, '15/01/2017'),
+							_1: {
+								ctor: '::',
+								_0: A5(_user$project$Article$Article, 7, 'Article 8', 'Lorem Ipsum 8', false, '15/01/2017'),
+								_1: {
+									ctor: '::',
+									_0: A5(_user$project$Article$Article, 8, 'Article 9', 'Lorem Ipsum 9', false, '15/01/2017'),
+									_1: {
+										ctor: '::',
+										_0: A5(_user$project$Article$Article, 9, 'Article 10', 'Lorem Ipsum 10', false, '15/01/2017'),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}
@@ -8808,15 +8835,54 @@ var _user$project$Navigation$viewNavigation = A2(
 		_1: {ctor: '[]'}
 	});
 
-var _user$project$RightPanel$viewArticleList = function (_p0) {
-	var _p1 = _p0;
+var _user$project$RightPanel$viewArticleList = function (model) {
+	var moreArticles = function (fullyExpanded) {
+		return (!fullyExpanded) ? A2(
+			_elm_lang$html$Html$a,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(
+					_user$project$Msg$Expand(true)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('expander normal-link'),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('More !'),
+				_1: {ctor: '[]'}
+			}) : A2(
+			_elm_lang$html$Html$a,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(
+					_user$project$Msg$Expand(false)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('expander normal-link'),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('Less !'),
+				_1: {ctor: '[]'}
+			});
+	};
+	var postListSize = 5;
+	var filteredList = model.fullyExpanded ? _user$project$Articles$articlesDesc(model.articles) : A2(
+		_elm_lang$core$List$take,
+		postListSize,
+		_user$project$Articles$articlesDesc(model.articles));
 	var emphasizeIfCurrent = function (m) {
 		var a = _elm_lang$html$Html$text(
 			A2(
 				_elm_lang$core$Basics_ops['++'],
 				m.date,
 				A2(_elm_lang$core$Basics_ops['++'], ' - ', m.title)));
-		return _elm_lang$core$Native_Utils.eq(m, _p1._1) ? A2(
+		return _elm_lang$core$Native_Utils.eq(m, model.currentArticle) ? A2(
 			_elm_lang$html$Html$b,
 			{ctor: '[]'},
 			{
@@ -8877,13 +8943,20 @@ var _user$project$RightPanel$viewArticleList = function (_p0) {
 						_0: _elm_lang$html$Html_Attributes$class('list-unstyled'),
 						_1: {ctor: '[]'}
 					},
-					A2(_elm_lang$core$List$map, articleDateAndTitleListLi, _p1._0)),
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						A2(_elm_lang$core$List$map, articleDateAndTitleListLi, filteredList),
+						{
+							ctor: '::',
+							_0: moreArticles(model.fullyExpanded),
+							_1: {ctor: '[]'}
+						})),
 				_1: {ctor: '[]'}
 			}
 		});
 };
-var _user$project$RightPanel$viewLi = function (_p2) {
-	var _p3 = _p2;
+var _user$project$RightPanel$viewLi = function (_p0) {
+	var _p1 = _p0;
 	return A2(
 		_elm_lang$html$Html$li,
 		{ctor: '[]'},
@@ -8893,12 +8966,12 @@ var _user$project$RightPanel$viewLi = function (_p2) {
 				_elm_lang$html$Html$a,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$href(_p3._0),
+					_0: _elm_lang$html$Html_Attributes$href(_p1._0),
 					_1: {ctor: '[]'}
 				},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text(_p3._1),
+					_0: _elm_lang$html$Html$text(_p1._1),
 					_1: {ctor: '[]'}
 				}),
 			_1: {ctor: '[]'}
@@ -8988,8 +9061,7 @@ var _user$project$RightPanel$viewRightPanel = function (m) {
 			_0: _user$project$RightPanel$viewAbout,
 			_1: {
 				ctor: '::',
-				_0: _user$project$RightPanel$viewArticleList(
-					{ctor: '_Tuple2', _0: m.articles, _1: m.currentArticle}),
+				_0: _user$project$RightPanel$viewArticleList(m),
 				_1: {
 					ctor: '::',
 					_0: _user$project$RightPanel$viewContact,
@@ -9074,7 +9146,7 @@ var _user$project$Main$update = F2(
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
-			default:
+			case 'Next':
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
@@ -9084,13 +9156,22 @@ var _user$project$Main$update = F2(
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{fullyExpanded: _p0._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
 		}
 	});
 var _user$project$Main$initialModel = function () {
 	var articleList = _user$project$Articles$getArticles;
 	return {
 		articles: articleList,
-		currentArticle: _user$project$Articles$lastArticle(articleList)
+		currentArticle: _user$project$Articles$lastArticle(articleList),
+		fullyExpanded: false
 	};
 }();
 var _user$project$Main$init = {ctor: '_Tuple2', _0: _user$project$Main$initialModel, _1: _elm_lang$core$Platform_Cmd$none};

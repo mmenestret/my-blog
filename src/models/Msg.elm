@@ -7,3 +7,4 @@ type Msg
     | Clicked Article
     | Previous
     | Next
+    | Expand Bool

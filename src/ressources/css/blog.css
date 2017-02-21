@@ -150,6 +150,12 @@ h6, .h6 {
   cursor:pointer
 }
 
+/* Expander */
+.expander {
+  margin:30px;
+  align: right;
+}
+
 /*
  * Blog posts
  */
@@ -177,9 +183,6 @@ h6, .h6 {
  */
 
 .blog-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
   padding: 40px 0;
   color: #999;
   text-align: center;

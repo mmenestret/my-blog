@@ -15,6 +15,12 @@ getArticles =
   , Article 1 "Article 2" "Lorem Ipsum 2" False "15/01/2017"
   , Article 2 "Article 3" "Lorem Ipsum 3" False "15/01/2017"
   , Article 3 "Article 4" "Lorem Ipsum 4" False "15/01/2017"
+  , Article 4 "Article 5" "Lorem Ipsum 5" False "15/01/2017"
+  , Article 5 "Article 6" "Lorem Ipsum 6" False "15/01/2017"
+  , Article 6 "Article 7" "Lorem Ipsum 7" False "15/01/2017"
+  , Article 7 "Article 8" "Lorem Ipsum 8" False "15/01/2017"
+  , Article 8 "Article 9" "Lorem Ipsum 9" False "15/01/2017"
+  , Article 9 "Article 10" "Lorem Ipsum 10" False "15/01/2017"
   ]
 
 articlesDesc : List Article -> List Article
@@ -46,11 +52,11 @@ getArticleById articles id =
 
 previousArticle : List Article -> Article -> Article
 previousArticle articles a =
-    Maybe.withDefault (firstArticle articles) (getArticleById articles (a.id - 1))
+    Maybe.withDefault (lastArticle articles) (getArticleById articles (a.id + 1))
 
 nextArticle : List Article -> Article -> Article
 nextArticle articles a =
-    Maybe.withDefault (lastArticle articles) (getArticleById articles (a.id + 1))
+    Maybe.withDefault (firstArticle articles) (getArticleById articles (a.id - 1))
 
 
 pager : Model -> Html Msg

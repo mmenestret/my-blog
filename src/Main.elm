@@ -30,6 +30,7 @@ initialModel =
     in
         { articles = articleList
         , currentArticle = Articles.lastArticle articleList
+        , fullyExpanded = False
         }
 
 
@@ -60,6 +61,11 @@ update msg model =
         Next ->
             (
                 { model | currentArticle = Articles.nextArticle model.articles model.currentArticle }
+            ,   Cmd.none )
+
+        Expand b ->
+            (
+                { model | fullyExpanded = b }
             ,   Cmd.none )
 
 -- SUBSCRIPTIONS
