@@ -56,15 +56,19 @@ viewArticleList model =
       moreArticles fullyExpanded =
         if (not fullyExpanded)
         then
-          a
-            [ onClick (Expand True)
-            , class "expander normal-link" ]
-            [ text "More !" ]
+          p
+            [ class "expander" ]
+            a
+              [ onClick (Expand True)
+              , class "normal-link" ]
+              [ text "More !" ]
         else
-          a
-            [ onClick (Expand False)
-            , class "expander normal-link" ]
-            [ text "Less !" ]
+          p
+            [ class "expander" ]
+            a
+              [ onClick (Expand False)
+              , class "expander normal-link" ]
+              [ text "Less !" ]
 
 
       filteredList =
