@@ -58,17 +58,19 @@ pager model =
     nav
       []
       [ ul
-        [ class "pager" ]
+        [ class "pager unselectable" ]
         [ li
-          [ class "previous" ]
+          []
           [ a
-            [ onClick Previous ]
+            [ onClick Previous
+            , class "normal-link" ]
             [ text "Previous" ]
           ]
         , li
-          [ class "next" ]
+          []
           [ a
-            [ onClick Next ]
+            [ onClick Next
+            , class "normal-link" ]
             [ text "Next" ]
           ]
         ]

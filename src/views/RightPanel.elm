@@ -44,7 +44,8 @@ viewArticleList (articles, current) =
             li
                 []
                 [ a
-                      [ onClick (Clicked article) ]
+                      [ onClick (Clicked article)
+                      , class "normal-link" ]
                       [ emphasizeIfCurrent article ]
                 ]
     in

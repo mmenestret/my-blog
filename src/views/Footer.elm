@@ -11,20 +11,14 @@ viewFooter =
     [ class "blog-footer" ]
     [ p
       []
-      [ text "Blog template built for"
+      [ text "Based on blog template built for"
       , a
           [ href "http://getbootstrap.com" ]
-          [ text "Bootstrap" ]
+          [ text " Bootstrap " ]
       , text "by"
       , a
           [ href "https://twitter.com/mdo" ]
-          [ text "@mdo" ]
+          [ text " @mdo" ]
       , text "."
-      ]
-    , p
-      []
-      [ a
-        [ href "#" ]
-        [ text "Back to top" ]
       ]
     ]

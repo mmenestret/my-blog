@@ -8426,7 +8426,7 @@ var _user$project$Articles$pager = function (model) {
 				_elm_lang$html$Html$ul,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('pager'),
+					_0: _elm_lang$html$Html_Attributes$class('pager unselectable'),
 					_1: {ctor: '[]'}
 				},
 				{
@@ -8441,7 +8441,11 @@ var _user$project$Articles$pager = function (model) {
 								{
 									ctor: '::',
 									_0: _elm_lang$html$Html_Events$onClick(_user$project$Msg$Previous),
-									_1: {ctor: '[]'}
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('normal-link'),
+										_1: {ctor: '[]'}
+									}
 								},
 								{
 									ctor: '::',
@@ -8462,7 +8466,11 @@ var _user$project$Articles$pager = function (model) {
 									{
 										ctor: '::',
 										_0: _elm_lang$html$Html_Events$onClick(_user$project$Msg$Next),
-										_1: {ctor: '[]'}
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('normal-link'),
+											_1: {ctor: '[]'}
+										}
 									},
 									{
 										ctor: '::',
@@ -8629,7 +8637,7 @@ var _user$project$Footer$viewFooter = A2(
 			{ctor: '[]'},
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html$text('Blog template built for'),
+				_0: _elm_lang$html$Html$text('Based on blog template built for'),
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -8641,7 +8649,7 @@ var _user$project$Footer$viewFooter = A2(
 						},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text('Bootstrap'),
+							_0: _elm_lang$html$Html$text(' Bootstrap '),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
@@ -8658,7 +8666,7 @@ var _user$project$Footer$viewFooter = A2(
 								},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text('@mdo'),
+									_0: _elm_lang$html$Html$text(' @mdo'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
@@ -8670,29 +8678,7 @@ var _user$project$Footer$viewFooter = A2(
 					}
 				}
 			}),
-		_1: {
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$p,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$a,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$href('#'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('Back to top'),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
-		}
+		_1: {ctor: '[]'}
 	});
 
 var _user$project$Header$viewHeader = A2(
@@ -8889,7 +8875,11 @@ var _user$project$RightPanel$viewArticleList = function (_p0) {
 						ctor: '::',
 						_0: _elm_lang$html$Html_Events$onClick(
 							_user$project$Msg$Clicked(article)),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('normal-link'),
+							_1: {ctor: '[]'}
+						}
 					},
 					{
 						ctor: '::',
