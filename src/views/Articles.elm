@@ -60,13 +60,13 @@ pager model =
       [ ul
         [ class "pager" ]
         [ li
-          []
+          [ class "previous" ]
           [ a
             [ onClick Previous ]
             [ text "Previous" ]
           ]
         , li
-          []
+          [ class "next" ]
           [ a
             [ onClick Next ]
             [ text "Next" ]
