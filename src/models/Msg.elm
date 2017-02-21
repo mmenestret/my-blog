@@ -5,5 +5,5 @@ import Article exposing (..)
 type Msg
     = NoOp
     | Clicked Article
-    | Previous Article
-    | Next Article
+    | Previous
+    | Next

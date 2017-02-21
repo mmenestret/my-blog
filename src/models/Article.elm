@@ -1,8 +1,10 @@
 module Article exposing (..)
 
+type alias Id = Int
 type alias Title = String
 type alias Article =
-    { title: Title
+    { id: Id
+    , title: Title
     , content: String
     , showContent: Bool
     , date: String

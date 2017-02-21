@@ -8399,23 +8399,24 @@ var _evancz$elm_markdown$Markdown$Options = F4(
 		return {githubFlavored: a, defaultHighlighting: b, sanitize: c, smartypants: d};
 	});
 
-var _user$project$Article$Article = F4(
-	function (a, b, c, d) {
-		return {title: a, content: b, showContent: c, date: d};
+var _user$project$Article$Article = F5(
+	function (a, b, c, d, e) {
+		return {id: a, title: b, content: c, showContent: d, date: e};
 	});
 
-var _user$project$Msg$Next = function (a) {
-	return {ctor: 'Next', _0: a};
-};
-var _user$project$Msg$Previous = function (a) {
-	return {ctor: 'Previous', _0: a};
-};
+var _user$project$Msg$Next = {ctor: 'Next'};
+var _user$project$Msg$Previous = {ctor: 'Previous'};
 var _user$project$Msg$Clicked = function (a) {
 	return {ctor: 'Clicked', _0: a};
 };
 var _user$project$Msg$NoOp = {ctor: 'NoOp'};
 
-var _user$project$Articles$pager = function (article) {
+var _user$project$Model$Model = F2(
+	function (a, b) {
+		return {articles: a, currentArticle: b};
+	});
+
+var _user$project$Articles$pager = function (model) {
 	return A2(
 		_elm_lang$html$Html$nav,
 		{ctor: '[]'},
@@ -8439,8 +8440,7 @@ var _user$project$Articles$pager = function (article) {
 								_elm_lang$html$Html$a,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(
-										_user$project$Msg$Previous(article)),
+									_0: _elm_lang$html$Html_Events$onClick(_user$project$Msg$Previous),
 									_1: {ctor: '[]'}
 								},
 								{
@@ -8461,8 +8461,7 @@ var _user$project$Articles$pager = function (article) {
 									_elm_lang$html$Html$a,
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onClick(
-											_user$project$Msg$Next(article)),
+										_0: _elm_lang$html$Html_Events$onClick(_user$project$Msg$Next),
 										_1: {ctor: '[]'}
 									},
 									{
@@ -8478,7 +8477,7 @@ var _user$project$Articles$pager = function (article) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Articles$viewArticle = function (a) {
+var _user$project$Articles$viewArticle = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -8506,7 +8505,7 @@ var _user$project$Articles$viewArticle = function (a) {
 						},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text(a.title),
+							_0: _elm_lang$html$Html$text(model.currentArticle.title),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
@@ -8520,7 +8519,7 @@ var _user$project$Articles$viewArticle = function (a) {
 							},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text(a.date),
+								_0: _elm_lang$html$Html$text(model.currentArticle.date),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
@@ -8531,10 +8530,10 @@ var _user$project$Articles$viewArticle = function (a) {
 									_evancz$elm_markdown$Markdown$defaultOptions,
 									{sanitize: true}),
 								{ctor: '[]'},
-								a.content),
+								model.currentArticle.content),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Articles$pager(a),
+								_0: _user$project$Articles$pager(model),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -8543,25 +8542,73 @@ var _user$project$Articles$viewArticle = function (a) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Articles$next = function (a) {
-	return A4(_user$project$Article$Article, 'Article 3', 'Lorem Ipsum 3', false, '15/01/2017');
+var _user$project$Articles$getArticleById = F2(
+	function (articles, id) {
+		return _elm_lang$core$List$head(
+			A2(
+				_elm_lang$core$List$filter,
+				function (a) {
+					return _elm_lang$core$Native_Utils.eq(a.id, id);
+				},
+				articles));
+	});
+var _user$project$Articles$topArticle = function (articles) {
+	var $default = A5(_user$project$Article$Article, 2, 'Article 1', '[testagain](http://www.google.fr)', false, '15/01/2017');
+	return A2(
+		_elm_lang$core$Maybe$withDefault,
+		$default,
+		_elm_lang$core$List$head(articles));
 };
-var _user$project$Articles$previous = function (a) {
-	return A4(_user$project$Article$Article, 'Article 1', 'Lorem Ipsum 1', false, '15/01/2017');
+var _user$project$Articles$articlesAsc = function (articles) {
+	return A2(
+		_elm_lang$core$List$sortBy,
+		function (a) {
+			return a.id;
+		},
+		articles);
 };
-var _user$project$Articles$lastArticle = A4(_user$project$Article$Article, 'Article 1', '[testagain](http://www.google.fr)', false, '15/01/2017');
+var _user$project$Articles$firstArticle = function (articles) {
+	return _user$project$Articles$topArticle(
+		_user$project$Articles$articlesAsc(articles));
+};
+var _user$project$Articles$previousArticle = F2(
+	function (articles, a) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			_user$project$Articles$firstArticle(articles),
+			A2(_user$project$Articles$getArticleById, articles, a.id - 1));
+	});
+var _user$project$Articles$articlesDesc = function (articles) {
+	return A2(
+		_elm_lang$core$List$sortBy,
+		function (a) {
+			return 0 - a.id;
+		},
+		articles);
+};
+var _user$project$Articles$lastArticle = function (articles) {
+	return _user$project$Articles$topArticle(
+		_user$project$Articles$articlesDesc(articles));
+};
+var _user$project$Articles$nextArticle = F2(
+	function (articles, a) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			_user$project$Articles$lastArticle(articles),
+			A2(_user$project$Articles$getArticleById, articles, a.id + 1));
+	});
 var _user$project$Articles$getArticles = {
 	ctor: '::',
-	_0: A4(_user$project$Article$Article, 'Article 1', '[testagain](http://www.google.fr)', false, '15/01/2017'),
+	_0: A5(_user$project$Article$Article, 0, 'Article 1', '[testagain](http://www.google.fr)', false, '15/01/2017'),
 	_1: {
 		ctor: '::',
-		_0: A4(_user$project$Article$Article, 'Article 2', 'Lorem Ipsum 2', false, '15/01/2017'),
+		_0: A5(_user$project$Article$Article, 1, 'Article 2', 'Lorem Ipsum 2', false, '15/01/2017'),
 		_1: {
 			ctor: '::',
-			_0: A4(_user$project$Article$Article, 'Article 3', 'Lorem Ipsum 3', false, '15/01/2017'),
+			_0: A5(_user$project$Article$Article, 2, 'Article 3', 'Lorem Ipsum 3', false, '15/01/2017'),
 			_1: {
 				ctor: '::',
-				_0: A4(_user$project$Article$Article, 'Article 4', 'Lorem Ipsum 4', false, '15/01/2017'),
+				_0: A5(_user$project$Article$Article, 3, 'Article 4', 'Lorem Ipsum 4', false, '15/01/2017'),
 				_1: {ctor: '[]'}
 			}
 		}
@@ -8685,11 +8732,6 @@ var _user$project$Header$viewHeader = A2(
 				}),
 			_1: {ctor: '[]'}
 		}
-	});
-
-var _user$project$Model$Model = F2(
-	function (a, b) {
-		return {articles: a, currentArticle: b};
 	});
 
 var _user$project$Navigation$viewNavigation = A2(
@@ -9035,7 +9077,7 @@ var _user$project$Main$view = function (model) {
 								},
 								{
 									ctor: '::',
-									_0: _user$project$Articles$viewArticle(model.currentArticle),
+									_0: _user$project$Articles$viewArticle(model),
 									_1: {
 										ctor: '::',
 										_0: _user$project$RightPanel$viewRightPanel(model),
@@ -9076,7 +9118,7 @@ var _user$project$Main$update = F2(
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{
-							currentArticle: _user$project$Articles$previous(_p0._0)
+							currentArticle: A2(_user$project$Articles$previousArticle, model.articles, model.currentArticle)
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
@@ -9086,13 +9128,19 @@ var _user$project$Main$update = F2(
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{
-							currentArticle: _user$project$Articles$next(_p0._0)
+							currentArticle: A2(_user$project$Articles$nextArticle, model.articles, model.currentArticle)
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 		}
 	});
-var _user$project$Main$initialModel = {articles: _user$project$Articles$getArticles, currentArticle: _user$project$Articles$lastArticle};
+var _user$project$Main$initialModel = function () {
+	var articleList = _user$project$Articles$getArticles;
+	return {
+		articles: articleList,
+		currentArticle: _user$project$Articles$lastArticle(articleList)
+	};
+}();
 var _user$project$Main$init = {ctor: '_Tuple2', _0: _user$project$Main$initialModel, _1: _elm_lang$core$Platform_Cmd$none};
 var _user$project$Main$main = _elm_lang$html$Html$program(
 	{init: _user$project$Main$init, view: _user$project$Main$view, update: _user$project$Main$update, subscriptions: _user$project$Main$subscriptions})();

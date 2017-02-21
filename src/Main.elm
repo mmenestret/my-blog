@@ -25,9 +25,12 @@ main =
 
 initialModel : Model
 initialModel =
-    { articles = Articles.getArticles
-    , currentArticle = Articles.lastArticle
-    }
+    let
+        articleList = Articles.getArticles
+    in
+        { articles = articleList
+        , currentArticle = Articles.lastArticle articleList
+        }
 
 
 init : ( Model, Cmd Msg )
@@ -49,14 +52,14 @@ update msg model =
                 { model | currentArticle = a }
             ,   Cmd.none )
 
-        Previous a ->
+        Previous ->
             (
-                { model | currentArticle = Articles.previous(a) }
+                { model | currentArticle = Articles.previousArticle model.articles model.currentArticle }
             ,   Cmd.none )
 
-        Next a ->
+        Next ->
             (
-                { model | currentArticle = Articles.next(a) }
+                { model | currentArticle = Articles.nextArticle model.articles model.currentArticle }
             ,   Cmd.none )
 
 -- SUBSCRIPTIONS
@@ -78,7 +81,7 @@ view model =
             [ Header.viewHeader
             , div
                 [ class "row" ]
-                [ Articles.viewArticle model.currentArticle
+                [ Articles.viewArticle model
                 , RightPanel.viewRightPanel model
                 ]
             ]
