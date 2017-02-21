@@ -37,16 +37,16 @@ viewArticleList model =
   let
       emphasizeIfCurrent m =
           let
-              a = text (m.date ++ " - " ++ m.title)
+              a = text m.title
           in if m == model.currentArticle then (b [] [a]) else a
 
       articleDateAndTitleListLi : Article -> Html Msg
       articleDateAndTitleListLi article =
           li
-              []
+              [ class "full-width" ]
               [ a
                     [ onClick (Clicked article)
-                    , class "normal-link" ]
+                    , class "normal-link article-link full-width" ]
                     [ emphasizeIfCurrent article ]
               ]
 
@@ -58,17 +58,19 @@ viewArticleList model =
         then
           p
             [ class "expander" ]
-            a
+            [ a
               [ onClick (Expand True)
               , class "normal-link" ]
-              [ text "More !" ]
+              [ text "More..." ]
+            ]
         else
           p
             [ class "expander" ]
-            a
+            [ a
               [ onClick (Expand False)
-              , class "expander normal-link" ]
-              [ text "Less !" ]
+              , class "normal-link" ]
+              [ text "Less..." ]
+            ]
 
 
       filteredList =
@@ -82,7 +84,7 @@ viewArticleList model =
           []
           [ text "Articles" ]
         , ol
-          [ class "list-unstyled" ]
+          [ class "list-unstyled full-width" ]
           ( (List.map articleDateAndTitleListLi filteredList)
             ++ [moreArticles model.fullyExpanded])
         ]

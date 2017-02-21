@@ -11,9 +11,9 @@ import Model exposing (..)
 
 getArticles : List Article
 getArticles =
-  [ Article 0 "Article 1" """[testagain](http://www.google.fr)""" False "15/01/2017"
+  [ Article 0 "Article 1 Article 1 Article 1 Article 1 " "[testagain](http://www.google.fr)" False "15/01/2017"
   , Article 1 "Article 2" "Lorem Ipsum 2" False "15/01/2017"
-  , Article 2 "Article 3" "Lorem Ipsum 3" False "15/01/2017"
+  , Article 2 "Article 3 Article 3 Article 3 Article 3 Article 3 " "Lorem Ipsum 3" False "15/01/2017"
   , Article 3 "Article 4" "Lorem Ipsum 4" False "15/01/2017"
   , Article 4 "Article 5" "Lorem Ipsum 5" False "15/01/2017"
   , Article 5 "Article 6" "Lorem Ipsum 6" False "15/01/2017"

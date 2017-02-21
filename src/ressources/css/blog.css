@@ -122,7 +122,6 @@ h6, .h6 {
   margin-bottom: 0;
 }
 
-
 /* Pagination */
 .pager {
   margin-bottom: 60px;
@@ -150,10 +149,25 @@ h6, .h6 {
   cursor:pointer
 }
 
+/* full width */
+.full-width {
+  display:inline-block;
+  width: 100%;
+}
+
+/* Article links */
+.article-link {
+  inline: block;
+  border-bottom: 1px solid #d1d1d1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* Expander */
 .expander {
-  margin:30px;
-  align: right;
+  margin-top:15px;
+  text-align: right;
 }
 
 /*

@@ -8610,13 +8610,13 @@ var _user$project$Articles$previousArticle = F2(
 	});
 var _user$project$Articles$getArticles = {
 	ctor: '::',
-	_0: A5(_user$project$Article$Article, 0, 'Article 1', '[testagain](http://www.google.fr)', false, '15/01/2017'),
+	_0: A5(_user$project$Article$Article, 0, 'Article 1 Article 1 Article 1 Article 1 ', '[testagain](http://www.google.fr)', false, '15/01/2017'),
 	_1: {
 		ctor: '::',
 		_0: A5(_user$project$Article$Article, 1, 'Article 2', 'Lorem Ipsum 2', false, '15/01/2017'),
 		_1: {
 			ctor: '::',
-			_0: A5(_user$project$Article$Article, 2, 'Article 3', 'Lorem Ipsum 3', false, '15/01/2017'),
+			_0: A5(_user$project$Article$Article, 2, 'Article 3 Article 3 Article 3 Article 3 Article 3 ', 'Lorem Ipsum 3', false, '15/01/2017'),
 			_1: {
 				ctor: '::',
 				_0: A5(_user$project$Article$Article, 3, 'Article 4', 'Lorem Ipsum 4', false, '15/01/2017'),
@@ -8838,36 +8838,58 @@ var _user$project$Navigation$viewNavigation = A2(
 var _user$project$RightPanel$viewArticleList = function (model) {
 	var moreArticles = function (fullyExpanded) {
 		return (!fullyExpanded) ? A2(
-			_elm_lang$html$Html$a,
+			_elm_lang$html$Html$p,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(
-					_user$project$Msg$Expand(true)),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('expander normal-link'),
-					_1: {ctor: '[]'}
-				}
+				_0: _elm_lang$html$Html_Attributes$class('expander'),
+				_1: {ctor: '[]'}
 			},
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html$text('More !'),
+				_0: A2(
+					_elm_lang$html$Html$a,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(
+							_user$project$Msg$Expand(true)),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('normal-link'),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('More...'),
+						_1: {ctor: '[]'}
+					}),
 				_1: {ctor: '[]'}
 			}) : A2(
-			_elm_lang$html$Html$a,
+			_elm_lang$html$Html$p,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(
-					_user$project$Msg$Expand(false)),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('expander normal-link'),
-					_1: {ctor: '[]'}
-				}
+				_0: _elm_lang$html$Html_Attributes$class('expander'),
+				_1: {ctor: '[]'}
 			},
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html$text('Less !'),
+				_0: A2(
+					_elm_lang$html$Html$a,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(
+							_user$project$Msg$Expand(false)),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('normal-link'),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Less...'),
+						_1: {ctor: '[]'}
+					}),
 				_1: {ctor: '[]'}
 			});
 	};
@@ -8877,11 +8899,7 @@ var _user$project$RightPanel$viewArticleList = function (model) {
 		postListSize,
 		_user$project$Articles$articlesDesc(model.articles));
 	var emphasizeIfCurrent = function (m) {
-		var a = _elm_lang$html$Html$text(
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				m.date,
-				A2(_elm_lang$core$Basics_ops['++'], ' - ', m.title)));
+		var a = _elm_lang$html$Html$text(m.title);
 		return _elm_lang$core$Native_Utils.eq(m, model.currentArticle) ? A2(
 			_elm_lang$html$Html$b,
 			{ctor: '[]'},
@@ -8894,7 +8912,11 @@ var _user$project$RightPanel$viewArticleList = function (model) {
 	var articleDateAndTitleListLi = function (article) {
 		return A2(
 			_elm_lang$html$Html$li,
-			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('full-width'),
+				_1: {ctor: '[]'}
+			},
 			{
 				ctor: '::',
 				_0: A2(
@@ -8905,7 +8927,7 @@ var _user$project$RightPanel$viewArticleList = function (model) {
 							_user$project$Msg$Clicked(article)),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('normal-link'),
+							_0: _elm_lang$html$Html_Attributes$class('normal-link article-link full-width'),
 							_1: {ctor: '[]'}
 						}
 					},
@@ -8940,7 +8962,7 @@ var _user$project$RightPanel$viewArticleList = function (model) {
 					_elm_lang$html$Html$ol,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('list-unstyled'),
+						_0: _elm_lang$html$Html_Attributes$class('list-unstyled full-width'),
 						_1: {ctor: '[]'}
 					},
 					A2(
