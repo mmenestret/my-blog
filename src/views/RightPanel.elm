@@ -56,7 +56,7 @@ viewArticleList (articles, current) =
             [ text "Articles" ]
           , ol
             [ class "list-unstyled" ]
-            (List.map articleDateAndTitleListLi articles)
+            (List.map articleDateAndTitleListLi (List.take 2 articles))
           ]
 
 viewContact : Html Msg
