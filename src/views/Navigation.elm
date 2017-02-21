@@ -18,16 +18,10 @@ viewNavigation =
           [ text "Home" ]
         , a
           [ class "blog-nav-item", href "#" ]
-          [ text "New features" ]
+          [ text "Article list" ]
         , a
           [ class "blog-nav-item", href "#" ]
-          [ text "Press" ]
-        , a
-          [ class "blog-nav-item", href "#" ]
-          [ text "New hires" ]
-        , a
-          [ class "blog-nav-item", href "#" ]
-          [ text "About" ]
+          [ text "Curriculum vitae" ]
         ]
       ]
     ]

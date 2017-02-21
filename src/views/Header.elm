@@ -11,8 +11,8 @@ viewHeader =
   [ class "blog-header" ]
   [ h1
     [ class "blog-title" ]
-    [ text "The Bootstrap Blog" ]
+    [ text "Geekocephale" ]
   , p
     [ class "lead blog-description" ]
-    [ text "The official example template of creating a blog with Bootstrap." ]
+    [ text "The blog of a Lambda God apprentice." ]
   ]

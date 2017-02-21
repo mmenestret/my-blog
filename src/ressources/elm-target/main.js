@@ -8699,7 +8699,7 @@ var _user$project$Header$viewHeader = A2(
 			},
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html$text('The Bootstrap Blog'),
+				_0: _elm_lang$html$Html$text('Geekocephale'),
 				_1: {ctor: '[]'}
 			}),
 		_1: {
@@ -8713,7 +8713,7 @@ var _user$project$Header$viewHeader = A2(
 				},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text('The official example template of creating a blog with Bootstrap.'),
+					_0: _elm_lang$html$Html$text('The blog of a Lambda God apprentice.'),
 					_1: {ctor: '[]'}
 				}),
 			_1: {ctor: '[]'}
@@ -8778,7 +8778,7 @@ var _user$project$Navigation$viewNavigation = A2(
 								},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text('New features'),
+									_0: _elm_lang$html$Html$text('Article list'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
@@ -8796,48 +8796,10 @@ var _user$project$Navigation$viewNavigation = A2(
 									},
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html$text('Press'),
+										_0: _elm_lang$html$Html$text('Curriculum vitae'),
 										_1: {ctor: '[]'}
 									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$a,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('blog-nav-item'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$href('#'),
-												_1: {ctor: '[]'}
-											}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('New hires'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$a,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('blog-nav-item'),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$href('#'),
-													_1: {ctor: '[]'}
-												}
-											},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('About'),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
-								}
+								_1: {ctor: '[]'}
 							}
 						}
 					}),
