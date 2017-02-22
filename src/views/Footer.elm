@@ -12,7 +12,7 @@ viewFooter =
     [ p
       []
       [
-        text "Voluntarily"
+        text "A voluntarily"
       , a
         [ href "https://en.wikipedia.org/wiki/KISS_principle" ]
         [ text " KISS " ]
@@ -27,9 +27,11 @@ viewFooter =
       , text "by"
       , a
           [ href "https://twitter.com/mdo" ]
-          [ text " @mdo)" ]
-      , text ". "
+          [ text " @mdo" ]
+      , text "). "
       , br [] []
-      , text "I made it to learn and a lot of tests and trials can be made on it on the future !"
+      , text "I made this blog to explain but also to learn so I could keep testing stuff on it someday !"
+      , br [] []
+      , text "© Martin Menestret"
       ]
     ]

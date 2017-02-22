@@ -8664,7 +8664,7 @@ var _user$project$Footer$viewFooter = A2(
 			{ctor: '[]'},
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html$text('Voluntarily'),
+				_0: _elm_lang$html$Html$text('A voluntarily'),
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -8727,12 +8727,12 @@ var _user$project$Footer$viewFooter = A2(
 												},
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html$text(' @mdo)'),
+													_0: _elm_lang$html$Html$text(' @mdo'),
 													_1: {ctor: '[]'}
 												}),
 											_1: {
 												ctor: '::',
-												_0: _elm_lang$html$Html$text('. '),
+												_0: _elm_lang$html$Html$text('). '),
 												_1: {
 													ctor: '::',
 													_0: A2(
@@ -8741,8 +8741,19 @@ var _user$project$Footer$viewFooter = A2(
 														{ctor: '[]'}),
 													_1: {
 														ctor: '::',
-														_0: _elm_lang$html$Html$text('I made it to learn and a lot of tests and trials can be made on it on the future !'),
-														_1: {ctor: '[]'}
+														_0: _elm_lang$html$Html$text('I made this blog to explain but also to learn so I could keep testing stuff on it someday !'),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$br,
+																{ctor: '[]'},
+																{ctor: '[]'}),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('© Martin Menestret'),
+																_1: {ctor: '[]'}
+															}
+														}
 													}
 												}
 											}
@@ -8903,110 +8914,149 @@ var _user$project$Navigation$viewNavigation = A2(
 		_1: {ctor: '[]'}
 	});
 
+var _user$project$RightPanel$articleAsList = F2(
+	function (articles, article) {
+		var emphasizeIfCurrent = function (m) {
+			var a = _elm_lang$html$Html$text(m.title);
+			return _elm_lang$core$Native_Utils.eq(m, article) ? A2(
+				_elm_lang$html$Html$b,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: a,
+					_1: {ctor: '[]'}
+				}) : a;
+		};
+		var articleTitleAsLi = function (article) {
+			return A2(
+				_elm_lang$html$Html$li,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('full-width'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$a,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(
+								_user$project$Msg$Clicked(article)),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('normal-link article-link full-width'),
+								_1: {ctor: '[]'}
+							}
+						},
+						{
+							ctor: '::',
+							_0: emphasizeIfCurrent(article),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				});
+		};
+		return A2(
+			_elm_lang$html$Html$ol,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('list-unstyled full-width'),
+				_1: {ctor: '[]'}
+			},
+			A2(_elm_lang$core$List$map, articleTitleAsLi, articles));
+	});
 var _user$project$RightPanel$viewArticleList = function (model) {
-	var moreArticles = function (fullyExpanded) {
-		return (!fullyExpanded) ? A2(
-			_elm_lang$html$Html$p,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('expander'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$a,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(
-							_user$project$Msg$Expand(true)),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('normal-link'),
-							_1: {ctor: '[]'}
+	var postShortListSize = 5;
+	var expander = F2(
+		function (fullyExpanded, nbOfArticles) {
+			var _p0 = {
+				ctor: '_Tuple2',
+				_0: fullyExpanded,
+				_1: _elm_lang$core$Native_Utils.cmp(nbOfArticles, postShortListSize) > 0
+			};
+			_v0_2:
+			do {
+				if (_p0.ctor === '_Tuple2') {
+					if (_p0._0 === true) {
+						if (_p0._1 === true) {
+							return _elm_lang$core$Maybe$Just(
+								A2(
+									_elm_lang$html$Html$p,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('expander'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$a,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onClick(
+													_user$project$Msg$Expand(true)),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('normal-link'),
+													_1: {ctor: '[]'}
+												}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('More...'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}));
+						} else {
+							break _v0_2;
 						}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('More...'),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}) : A2(
-			_elm_lang$html$Html$p,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('expander'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$a,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(
-							_user$project$Msg$Expand(false)),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('normal-link'),
-							_1: {ctor: '[]'}
+					} else {
+						if (_p0._1 === true) {
+							return _elm_lang$core$Maybe$Just(
+								A2(
+									_elm_lang$html$Html$p,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('expander'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$a,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onClick(
+													_user$project$Msg$Expand(false)),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('normal-link'),
+													_1: {ctor: '[]'}
+												}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Less...'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}));
+						} else {
+							break _v0_2;
 						}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('Less...'),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			});
-	};
-	var postListSize = 5;
+					}
+				} else {
+					break _v0_2;
+				}
+			} while(false);
+			return _elm_lang$core$Maybe$Nothing;
+		});
 	var filteredList = model.fullyExpanded ? _user$project$Articles$articlesDesc(model.articles) : A2(
 		_elm_lang$core$List$take,
-		postListSize,
+		postShortListSize,
 		_user$project$Articles$articlesDesc(model.articles));
-	var emphasizeIfCurrent = function (m) {
-		var a = _elm_lang$html$Html$text(m.title);
-		return _elm_lang$core$Native_Utils.eq(m, model.currentArticle) ? A2(
-			_elm_lang$html$Html$b,
-			{ctor: '[]'},
-			{
-				ctor: '::',
-				_0: a,
-				_1: {ctor: '[]'}
-			}) : a;
-	};
-	var articleDateAndTitleListLi = function (article) {
-		return A2(
-			_elm_lang$html$Html$li,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('full-width'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$a,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(
-							_user$project$Msg$Clicked(article)),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('normal-link article-link full-width'),
-							_1: {ctor: '[]'}
-						}
-					},
-					{
-						ctor: '::',
-						_0: emphasizeIfCurrent(article),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			});
-	};
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -9014,39 +9064,43 @@ var _user$project$RightPanel$viewArticleList = function (model) {
 			_0: _elm_lang$html$Html_Attributes$class('sidebar-module'),
 			_1: {ctor: '[]'}
 		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$h4,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('Articles'),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$ol,
+					_elm_lang$html$Html$h4,
+					{ctor: '[]'},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('list-unstyled full-width'),
+						_0: _elm_lang$html$Html$text('Articles'),
 						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(_user$project$RightPanel$articleAsList, filteredList, model.currentArticle),
+					_1: {ctor: '[]'}
+				}
+			},
+			A2(
+				_elm_lang$core$Maybe$withDefault,
+				{ctor: '[]'},
+				A2(
+					_elm_lang$core$Maybe$map,
+					function (x) {
+						return {
+							ctor: '::',
+							_0: x,
+							_1: {ctor: '[]'}
+						};
 					},
 					A2(
-						_elm_lang$core$Basics_ops['++'],
-						A2(_elm_lang$core$List$map, articleDateAndTitleListLi, filteredList),
-						{
-							ctor: '::',
-							_0: moreArticles(model.fullyExpanded),
-							_1: {ctor: '[]'}
-						})),
-				_1: {ctor: '[]'}
-			}
-		});
+						expander,
+						model.fullyExpanded,
+						_elm_lang$core$List$length(model.articles))))));
 };
-var _user$project$RightPanel$viewLi = function (_p0) {
-	var _p1 = _p0;
+var _user$project$RightPanel$linkAsLi = function (_p1) {
+	var _p2 = _p1;
 	return A2(
 		_elm_lang$html$Html$li,
 		{ctor: '[]'},
@@ -9056,12 +9110,12 @@ var _user$project$RightPanel$viewLi = function (_p0) {
 				_elm_lang$html$Html$a,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$href(_p1._0),
+					_0: _elm_lang$html$Html_Attributes$href(_p2._0),
 					_1: {ctor: '[]'}
 				},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text(_p1._1),
+					_0: _elm_lang$html$Html$text(_p2._1),
 					_1: {ctor: '[]'}
 				}),
 			_1: {ctor: '[]'}
@@ -9095,7 +9149,7 @@ var _user$project$RightPanel$viewContact = A2(
 				},
 				A2(
 					_elm_lang$core$List$map,
-					_user$project$RightPanel$viewLi,
+					_user$project$RightPanel$linkAsLi,
 					{
 						ctor: '::',
 						_0: {ctor: '_Tuple2', _0: 'https://twitter.com/mmenestret', _1: 'Twitter'},
@@ -9132,7 +9186,7 @@ var _user$project$RightPanel$viewAbout = A2(
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text('I\'m an overcurious software developper with an insatiable hunger for learning.'),
+					_0: _elm_lang$html$Html$text('I\'m a curious about everything software developper with an insatiable hunger for learning.'),
 					_1: {
 						ctor: '::',
 						_0: A2(
@@ -9141,13 +9195,13 @@ var _user$project$RightPanel$viewAbout = A2(
 							{ctor: '[]'}),
 						_1: {
 							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$br,
-								{ctor: '[]'},
-								{ctor: '[]'}),
+							_0: _elm_lang$html$Html$text('My current interests and attractions, in no particular order are:'),
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('My current interests and attractions, in no particular order are:'),
+								_0: A2(
+									_elm_lang$html$Html$br,
+									{ctor: '[]'},
+									{ctor: '[]'}),
 								_1: {
 									ctor: '::',
 									_0: A2(
@@ -9157,21 +9211,14 @@ var _user$project$RightPanel$viewAbout = A2(
 									_1: {
 										ctor: '::',
 										_0: A2(
-											_elm_lang$html$Html$br,
+											_elm_lang$html$Html$b,
 											{ctor: '[]'},
-											{ctor: '[]'}),
-										_1: {
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$b,
-												{ctor: '[]'},
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html$text('Functional programing, Scala, Elm, Haskell'),
-													_1: {ctor: '[]'}
-												}),
-											_1: {ctor: '[]'}
-										}
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Functional programing, Scala, Elm, Haskell'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
 									}
 								}
 							}
