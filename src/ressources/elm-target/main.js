@@ -8553,10 +8553,6 @@ var _user$project$Articles$viewArticle = function (model) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Articles$isAfterShortList = F3(
-	function (articles, shortListSize, currentArticle) {
-		return false;
-	});
 var _user$project$Articles$getArticleById = F2(
 	function (articles, id) {
 		return _elm_lang$core$List$head(
@@ -8611,6 +8607,16 @@ var _user$project$Articles$previousArticle = F2(
 			_elm_lang$core$Maybe$withDefault,
 			_user$project$Articles$lastArticle(articles),
 			A2(_user$project$Articles$getArticleById, articles, a.id + 1));
+	});
+var _user$project$Articles$isAfterShortList = F3(
+	function (articles, shortListSize, currentArticle) {
+		return !A2(
+			_elm_lang$core$List$member,
+			currentArticle,
+			A2(
+				_elm_lang$core$List$take,
+				shortListSize,
+				_user$project$Articles$articlesDesc(articles)));
 	});
 var _user$project$Articles$getArticles = {
 	ctor: '::',

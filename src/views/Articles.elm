@@ -60,7 +60,7 @@ nextArticle articles a =
 
 isAfterShortList : List Article -> Int -> Article -> Bool
 isAfterShortList articles shortListSize currentArticle =
- articles |> articlesDesc |> (List.take shortListSize) |> (List.member currentArticle)
+ not (articles |> articlesDesc |> (List.take shortListSize) |> (List.member currentArticle))
 
 pager : Model -> Html Msg
 pager model =
