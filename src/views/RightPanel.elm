@@ -25,7 +25,6 @@ viewAbout =
       , text
             "My current interests and attractions, in no particular order are:"
       , br [] []
-      , br [] []
       , b
             []
             [text "Functional programing, Scala, Elm, Haskell"]
