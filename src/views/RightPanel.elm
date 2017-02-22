@@ -67,13 +67,11 @@ articleAsList articles article =
 viewArticleList : Model -> Html Msg
 viewArticleList model =
   let
-      shortListSize = 5
-
-      maybeExpander : Bool -> Int -> Maybe (Html Msg)
-      maybeExpander fullyExpanded nbOfArticles =
+      maybeExpander : Bool -> Int -> List (Html Msg)
+      maybeExpander isFullyExpanded nbOfArticles =
         let
           expander =
-            case (fullyExpanded, (nbOfArticles > shortListSize)) of
+            case (isFullyExpanded, (nbOfArticles > model.shortListSize)) of
               (False, True) ->
                 Just
                   (p
@@ -99,9 +97,9 @@ viewArticleList model =
 
 
       shortList =
-        if model.fullyExpanded
+        if model.isFullyExpanded
         then (Articles.articlesDesc model.articles)
-        else model.articles |> Articles.articlesDesc |> List.take shortListSize
+        else model.articles |> Articles.articlesDesc |> List.take model.shortListSize
 
       articleListSize = List.length model.articles
 

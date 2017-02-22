@@ -1,6 +1,5 @@
 import Html exposing (..)
 import Html.Attributes exposing (..)
-
 -- Types
 import Model exposing (..)
 import Msg exposing (..)
@@ -11,6 +10,7 @@ import Header
 import Articles
 import RightPanel
 import Footer
+
 
 main : Program Never Model Msg
 main =
@@ -30,7 +30,8 @@ initialModel =
     in
         { articles = articleList
         , currentArticle = Articles.lastArticle articleList
-        , fullyExpanded = False
+        , isFullyExpanded = False
+        , shortListSize = 5
         }
 
 
@@ -46,27 +47,25 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         NoOp ->
-            ( model, Cmd.none )
+            model ! []
 
         Clicked a ->
-            (
-                { model | currentArticle = a }
-            ,   Cmd.none )
+            { model | currentArticle = a } ! []
 
         Previous ->
-            (
-                { model | currentArticle = Articles.previousArticle model.articles model.currentArticle }
-            ,   Cmd.none )
+            { model | currentArticle = Articles.previousArticle model.articles model.currentArticle } ! []
 
         Next ->
-            (
-                { model | currentArticle = Articles.nextArticle model.articles model.currentArticle }
-            ,   Cmd.none )
+            let
+              newModel = { model | currentArticle = Articles.nextArticle model.articles model.currentArticle }
+
+             in
+               if (Articles.isAfterShortList newModel.articles newModel.shortListSize newModel.currentArticle)
+               then update (Expand True) newModel
+               else newModel ! []
 
         Expand b ->
-            (
-                { model | fullyExpanded = b }
-            ,   Cmd.none )
+            { model | isFullyExpanded = b } ! []
 
 -- SUBSCRIPTIONS
 

@@ -8414,9 +8414,9 @@ var _user$project$Msg$Clicked = function (a) {
 };
 var _user$project$Msg$NoOp = {ctor: 'NoOp'};
 
-var _user$project$Model$Model = F3(
-	function (a, b, c) {
-		return {articles: a, currentArticle: b, fullyExpanded: c};
+var _user$project$Model$Model = F4(
+	function (a, b, c, d) {
+		return {articles: a, currentArticle: b, isFullyExpanded: c, shortListSize: d};
 	});
 
 var _user$project$Articles$pager = function (model) {
@@ -8553,6 +8553,10 @@ var _user$project$Articles$viewArticle = function (model) {
 			_1: {ctor: '[]'}
 		});
 };
+var _user$project$Articles$isAfterShortList = F3(
+	function (articles, shortListSize, currentArticle) {
+		return false;
+	});
 var _user$project$Articles$getArticleById = F2(
 	function (articles, id) {
 		return _elm_lang$core$List$head(
@@ -8967,96 +8971,111 @@ var _user$project$RightPanel$articleAsList = F2(
 			A2(_elm_lang$core$List$map, articleTitleAsLi, articles));
 	});
 var _user$project$RightPanel$viewArticleList = function (model) {
-	var postShortListSize = 5;
-	var expander = F2(
-		function (fullyExpanded, nbOfArticles) {
-			var _p0 = {
-				ctor: '_Tuple2',
-				_0: fullyExpanded,
-				_1: _elm_lang$core$Native_Utils.cmp(nbOfArticles, postShortListSize) > 0
-			};
-			_v0_2:
-			do {
-				if (_p0.ctor === '_Tuple2') {
-					if (_p0._0 === false) {
-						if (_p0._1 === true) {
-							return _elm_lang$core$Maybe$Just(
-								A2(
-									_elm_lang$html$Html$p,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('expander'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$a,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Events$onClick(
-													_user$project$Msg$Expand(true)),
-												_1: {
+	var articleListSize = _elm_lang$core$List$length(model.articles);
+	var shortList = model.isFullyExpanded ? _user$project$Articles$articlesDesc(model.articles) : A2(
+		_elm_lang$core$List$take,
+		model.shortListSize,
+		_user$project$Articles$articlesDesc(model.articles));
+	var maybeExpander = F2(
+		function (isFullyExpanded, nbOfArticles) {
+			var expander = function () {
+				var _p0 = {
+					ctor: '_Tuple2',
+					_0: isFullyExpanded,
+					_1: _elm_lang$core$Native_Utils.cmp(nbOfArticles, model.shortListSize) > 0
+				};
+				_v0_2:
+				do {
+					if (_p0.ctor === '_Tuple2') {
+						if (_p0._0 === false) {
+							if (_p0._1 === true) {
+								return _elm_lang$core$Maybe$Just(
+									A2(
+										_elm_lang$html$Html$p,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('expander'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$a,
+												{
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$class('normal-link'),
+													_0: _elm_lang$html$Html_Events$onClick(
+														_user$project$Msg$Expand(true)),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('normal-link'),
+														_1: {ctor: '[]'}
+													}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('More...'),
 													_1: {ctor: '[]'}
-												}
-											},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('More...'),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}));
+												}),
+											_1: {ctor: '[]'}
+										}));
+							} else {
+								break _v0_2;
+							}
 						} else {
-							break _v0_2;
+							if (_p0._1 === true) {
+								return _elm_lang$core$Maybe$Just(
+									A2(
+										_elm_lang$html$Html$p,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('expander'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$a,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onClick(
+														_user$project$Msg$Expand(false)),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('normal-link'),
+														_1: {ctor: '[]'}
+													}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Less...'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}));
+							} else {
+								break _v0_2;
+							}
 						}
 					} else {
-						if (_p0._1 === true) {
-							return _elm_lang$core$Maybe$Just(
-								A2(
-									_elm_lang$html$Html$p,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('expander'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$a,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Events$onClick(
-													_user$project$Msg$Expand(false)),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$class('normal-link'),
-													_1: {ctor: '[]'}
-												}
-											},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('Less...'),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}));
-						} else {
-							break _v0_2;
-						}
+						break _v0_2;
 					}
-				} else {
-					break _v0_2;
-				}
-			} while(false);
-			return _elm_lang$core$Maybe$Nothing;
+				} while(false);
+				return _elm_lang$core$Maybe$Nothing;
+			}();
+			return A2(
+				_elm_lang$core$Maybe$withDefault,
+				{ctor: '[]'},
+				A2(
+					_elm_lang$core$Maybe$map,
+					function (x) {
+						return {
+							ctor: '::',
+							_0: x,
+							_1: {ctor: '[]'}
+						};
+					},
+					expander));
 		});
-	var filteredList = model.fullyExpanded ? _user$project$Articles$articlesDesc(model.articles) : A2(
-		_elm_lang$core$List$take,
-		postShortListSize,
-		_user$project$Articles$articlesDesc(model.articles));
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -9078,26 +9097,11 @@ var _user$project$RightPanel$viewArticleList = function (model) {
 					}),
 				_1: {
 					ctor: '::',
-					_0: A2(_user$project$RightPanel$articleAsList, filteredList, model.currentArticle),
+					_0: A2(_user$project$RightPanel$articleAsList, shortList, model.currentArticle),
 					_1: {ctor: '[]'}
 				}
 			},
-			A2(
-				_elm_lang$core$Maybe$withDefault,
-				{ctor: '[]'},
-				A2(
-					_elm_lang$core$Maybe$map,
-					function (x) {
-						return {
-							ctor: '::',
-							_0: x,
-							_1: {ctor: '[]'}
-						};
-					},
-					A2(
-						expander,
-						model.fullyExpanded,
-						_elm_lang$core$List$length(model.articles))))));
+			A2(maybeExpander, model.isFullyExpanded, articleListSize)));
 };
 var _user$project$RightPanel$linkAsLi = function (_p1) {
 	var _p2 = _p1;
@@ -9304,46 +9308,57 @@ var _user$project$Main$subscriptions = function (model) {
 };
 var _user$project$Main$update = F2(
 	function (msg, model) {
-		var _p0 = msg;
-		switch (_p0.ctor) {
-			case 'NoOp':
-				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
-			case 'Clicked':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
+		update:
+		while (true) {
+			var _p0 = msg;
+			switch (_p0.ctor) {
+				case 'NoOp':
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
 						model,
-						{currentArticle: _p0._0}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			case 'Previous':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{
-							currentArticle: A2(_user$project$Articles$previousArticle, model.articles, model.currentArticle)
-						}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			case 'Next':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
+						{ctor: '[]'});
+				case 'Clicked':
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{currentArticle: _p0._0}),
+						{ctor: '[]'});
+				case 'Previous':
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								currentArticle: A2(_user$project$Articles$previousArticle, model.articles, model.currentArticle)
+							}),
+						{ctor: '[]'});
+				case 'Next':
+					var newModel = _elm_lang$core$Native_Utils.update(
 						model,
 						{
 							currentArticle: A2(_user$project$Articles$nextArticle, model.articles, model.currentArticle)
-						}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			default:
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{fullyExpanded: _p0._0}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
+						});
+					if (A3(_user$project$Articles$isAfterShortList, newModel.articles, newModel.shortListSize, newModel.currentArticle)) {
+						var _v1 = _user$project$Msg$Expand(true),
+							_v2 = newModel;
+						msg = _v1;
+						model = _v2;
+						continue update;
+					} else {
+						return A2(
+							_elm_lang$core$Platform_Cmd_ops['!'],
+							newModel,
+							{ctor: '[]'});
+					}
+				default:
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{isFullyExpanded: _p0._0}),
+						{ctor: '[]'});
+			}
 		}
 	});
 var _user$project$Main$initialModel = function () {
@@ -9351,7 +9366,8 @@ var _user$project$Main$initialModel = function () {
 	return {
 		articles: articleList,
 		currentArticle: _user$project$Articles$lastArticle(articleList),
-		fullyExpanded: false
+		isFullyExpanded: false,
+		shortListSize: 5
 	};
 }();
 var _user$project$Main$init = {ctor: '_Tuple2', _0: _user$project$Main$initialModel, _1: _elm_lang$core$Platform_Cmd$none};

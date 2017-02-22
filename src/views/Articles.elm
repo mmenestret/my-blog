@@ -58,6 +58,9 @@ nextArticle : List Article -> Article -> Article
 nextArticle articles a =
     Maybe.withDefault (firstArticle articles) (getArticleById articles (a.id - 1))
 
+isAfterShortList : List Article -> Int -> Article -> Bool
+isAfterShortList articles shortListSize currentArticle =
+ False
 
 pager : Model -> Html Msg
 pager model =
