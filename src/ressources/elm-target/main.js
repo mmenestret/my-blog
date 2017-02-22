@@ -8978,7 +8978,7 @@ var _user$project$RightPanel$viewArticleList = function (model) {
 			_v0_2:
 			do {
 				if (_p0.ctor === '_Tuple2') {
-					if (_p0._0 === true) {
+					if (_p0._0 === false) {
 						if (_p0._1 === true) {
 							return _elm_lang$core$Maybe$Just(
 								A2(

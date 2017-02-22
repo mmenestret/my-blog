@@ -67,50 +67,51 @@ articleAsList articles article =
 viewArticleList : Model -> Html Msg
 viewArticleList model =
   let
-      postShortListSize = 5
+      shortListSize = 5
 
-      expander : Bool -> Int -> Maybe (Html Msg)
-      expander fullyExpanded nbOfArticles =
-        case (fullyExpanded, (nbOfArticles > postShortListSize)) of
-          (True, True) ->
-            Just
-              (p
-                [ class "expander" ]
-                [ a
-                  [ onClick (Expand True)
-                  , class "normal-link" ]
-                  [ text "More..." ]
-                ])
+      maybeExpander : Bool -> Int -> Maybe (Html Msg)
+      maybeExpander fullyExpanded nbOfArticles =
+        let
+          expander =
+            case (fullyExpanded, (nbOfArticles > shortListSize)) of
+              (False, True) ->
+                Just
+                  (p
+                    [ class "expander" ]
+                    [ a
+                      [ onClick (Expand True)
+                      , class "normal-link" ]
+                      [ text "More..." ]
+                    ])
 
-          (False, True) ->
-            Just (
-              p
-                [ class "expander" ]
-                [ a
-                  [ onClick (Expand False)
-                  , class "normal-link" ]
-                  [ text "Less..." ]
-                ])
+              (True, True) ->
+                Just (
+                  p
+                    [ class "expander" ]
+                    [ a
+                      [ onClick (Expand False)
+                      , class "normal-link" ]
+                      [ text "Less..." ]
+                    ])
 
-          _ -> Nothing
+              _ -> Nothing
+            in (Maybe.withDefault [] (Maybe.map (\x -> [x]) expander))
 
-      filteredList =
+
+      shortList =
         if model.fullyExpanded
         then (Articles.articlesDesc model.articles)
-        else model.articles |> Articles.articlesDesc |> List.take postShortListSize
+        else model.articles |> Articles.articlesDesc |> List.take shortListSize
+
+      articleListSize = List.length model.articles
 
   in
     div
       [ class "sidebar-module" ]
       ([
         h4 [] [ text "Articles" ]
-      , (articleAsList filteredList model.currentArticle)
-      ] ++
-        (Maybe.withDefault
-          []
-          (Maybe.map
-            (\x -> [x])
-            (expander model.fullyExpanded (List.length model.articles)))))
+      , (articleAsList shortList model.currentArticle)
+      ] ++ (maybeExpander model.isFullyExpanded articleListSize))
 
 
 viewContact : Html Msg
