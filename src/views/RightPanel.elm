@@ -15,11 +15,21 @@ viewAbout =
     [ class "sidebar-module sidebar-module-inset" ]
     [ h4
       []
-      [ text "About" ]
+      [ text "About Me" ]
     , p
       []
       [ text
-            "Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur." ]
+            "I'm an overcurious software developper with an insatiable hunger for learning."
+      , br [] []
+      , br [] []
+      , text
+            "My current interests and attractions, in no particular order are:"
+      , br [] []
+      , br [] []
+      , b
+            []
+            [text "Functional programing, Scala, Elm, Haskell"]
+      ]
     ]
 
 viewLi : ( String, String ) -> Html Msg
@@ -98,7 +108,7 @@ viewContact =
       [ text "Elsewhere" ]
     , ol
       [ class "list-unstyled" ]
-      (List.map viewLi [("#", "Twitter"), ("#", "GitHub")])
+      (List.map viewLi [("https://twitter.com/mmenestret", "Twitter"), ("https://github.com/mmenestret", "GitHub")])
     ]
 
 viewRightPanel : Model -> Html Msg

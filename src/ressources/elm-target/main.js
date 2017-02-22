@@ -8664,42 +8664,91 @@ var _user$project$Footer$viewFooter = A2(
 			{ctor: '[]'},
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html$text('Based on blog template built for'),
+				_0: _elm_lang$html$Html$text('Voluntarily'),
 				_1: {
 					ctor: '::',
 					_0: A2(
 						_elm_lang$html$Html$a,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$href('http://getbootstrap.com'),
+							_0: _elm_lang$html$Html_Attributes$href('https://en.wikipedia.org/wiki/KISS_principle'),
 							_1: {ctor: '[]'}
 						},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text(' Bootstrap '),
+							_0: _elm_lang$html$Html$text(' KISS '),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$html$Html$text('by'),
+						_0: _elm_lang$html$Html$text('static website, built with '),
 						_1: {
 							ctor: '::',
 							_0: A2(
 								_elm_lang$html$Html$a,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$href('https://twitter.com/mdo'),
+									_0: _elm_lang$html$Html_Attributes$href('http://elm-lang.org/'),
 									_1: {ctor: '[]'}
 								},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text(' @mdo'),
+									_0: _elm_lang$html$Html$text(' Elm '),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('.'),
-								_1: {ctor: '[]'}
+								_0: _elm_lang$html$Html$text('(based on blog template built for'),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$a,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$href('http://getbootstrap.com'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(' Bootstrap '),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('by'),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$a,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$href('https://twitter.com/mdo'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text(' @mdo)'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('. '),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$br,
+														{ctor: '[]'},
+														{ctor: '[]'}),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('I made it to learn and a lot of tests and trials can be made on it on the future !'),
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}
+								}
 							}
 						}
 					}
@@ -8726,8 +8775,27 @@ var _user$project$Header$viewHeader = A2(
 			},
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html$text('Geekocephale'),
-				_1: {ctor: '[]'}
+				_0: _elm_lang$html$Html$text('Geek'),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$img,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$src('ressources/img/geekocephale.png'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('title-img'),
+								_1: {ctor: '[]'}
+							}
+						},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('cephale'),
+						_1: {ctor: '[]'}
+					}
+				}
 			}),
 		_1: {
 			ctor: '::',
@@ -9030,10 +9098,10 @@ var _user$project$RightPanel$viewContact = A2(
 					_user$project$RightPanel$viewLi,
 					{
 						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: '#', _1: 'Twitter'},
+						_0: {ctor: '_Tuple2', _0: 'https://twitter.com/mmenestret', _1: 'Twitter'},
 						_1: {
 							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: '#', _1: 'GitHub'},
+							_0: {ctor: '_Tuple2', _0: 'https://github.com/mmenestret', _1: 'GitHub'},
 							_1: {ctor: '[]'}
 						}
 					})),
@@ -9054,7 +9122,7 @@ var _user$project$RightPanel$viewAbout = A2(
 			{ctor: '[]'},
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html$text('About'),
+				_0: _elm_lang$html$Html$text('About Me'),
 				_1: {ctor: '[]'}
 			}),
 		_1: {
@@ -9064,8 +9132,51 @@ var _user$project$RightPanel$viewAbout = A2(
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text('Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.'),
-					_1: {ctor: '[]'}
+					_0: _elm_lang$html$Html$text('I\'m an overcurious software developper with an insatiable hunger for learning.'),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$br,
+							{ctor: '[]'},
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$br,
+								{ctor: '[]'},
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('My current interests and attractions, in no particular order are:'),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$br,
+										{ctor: '[]'},
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$br,
+											{ctor: '[]'},
+											{ctor: '[]'}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$b,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Functional programing, Scala, Elm, Haskell'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					}
 				}),
 			_1: {ctor: '[]'}
 		}

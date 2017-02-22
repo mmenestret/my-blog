@@ -11,7 +11,14 @@ viewHeader =
   [ class "blog-header" ]
   [ h1
     [ class "blog-title" ]
-    [ text "Geekocephale" ]
+    [ text "Geek"
+    , img
+        [ src "ressources/img/geekocephale.png"
+        , class "title-img"
+        ]
+        []
+    , text "cephale"
+    ]
   , p
     [ class "lead blog-description" ]
     [ text "The blog of a Lambda God apprentice." ]
