@@ -7,4 +7,5 @@ type alias Model =
   , currentArticle : Article
   , isFullyExpanded : Bool
   , shortListSize : Int
+  , articlesTest : List String
   }
