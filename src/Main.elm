@@ -1,11 +1,9 @@
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Markdown exposing (toHtml)
 
 -- Types
 import Model exposing (..)
 import Msg exposing (..)
-import Flags exposing (..)
 
 -- Views
 import Navigation
@@ -14,9 +12,9 @@ import Articles
 import RightPanel
 import Footer
 
-main : Program Flags Model Msg
+main : Program Never Model Msg
 main =
-    Html.programWithFlags
+    Html.program
         { init = init
         , view = view
         , update = update
@@ -25,8 +23,8 @@ main =
 
 -- MODEL
 
-init : Flags -> ( Model, Cmd Msg )
-init flags =
+init : ( Model, Cmd Msg )
+init =
   let
       articleList = Articles.getArticles
   in
@@ -34,7 +32,6 @@ init flags =
       , currentArticle = Articles.lastArticle articleList
       , isFullyExpanded = False
       , shortListSize = 5
-      , articlesTest = flags.articles
       } ! []
 
 
@@ -80,8 +77,7 @@ subscriptions model =
 view : Model -> Html Msg
 view model =
     div []
-        [ div [] (List.map (\x -> (toHtml [] x)) model.articlesTest)
-        , Navigation.viewNavigation
+        [ Navigation.viewNavigation
         , div
             [ class "container" ]
             [ Header.viewHeader
