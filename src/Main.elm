@@ -2,7 +2,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 
 -- Types
-import Model exposing (..)
+import Article exposing (..)
 import Msg exposing (..)
 
 -- Views
@@ -12,16 +12,14 @@ import Articles
 import RightPanel
 import Footer
 
-main : Program Never Model Msg
-main =
-    Html.program
-        { init = init
-        , view = view
-        , update = update
-        , subscriptions = subscriptions
-        }
-
 -- MODEL
+
+type alias Model =
+  { articles  : List Article
+  , currentArticle : Article
+  , isFullyExpanded : Bool
+  , shortListSize : Int
+  }
 
 init : ( Model, Cmd Msg )
 init =
@@ -76,6 +74,12 @@ subscriptions model =
 
 view : Model -> Html Msg
 view model =
+  let
+    current = model.currentArticle
+    articles = model.articles
+    expanded = model.isFullyExpanded
+    listSize = model.shortListSize
+  in
     div []
         [ Navigation.viewNavigation
         , div
@@ -83,9 +87,20 @@ view model =
             [ Header.viewHeader
             , div
                 [ class "row" ]
-                [ Articles.viewArticle model
-                , RightPanel.viewRightPanel model
+                [ Articles.viewArticle current
+                , RightPanel.viewRightPanel articles current listSize expanded
                 ]
             ]
         , Footer.viewFooter
         ]
+
+-- Main
+
+main : Program Never Model Msg
+main =
+    Html.program
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = subscriptions
+        }

@@ -6,7 +6,6 @@ import Html.Events exposing (..)
 
 import Msg exposing (..)
 import Article exposing (..)
-import Model exposing (..)
 
 import Articles exposing (articlesDesc)
 viewAbout : Html Msg
@@ -64,14 +63,14 @@ articleAsList articles article =
       (List.map articleTitleAsLi articles)
 
 
-viewArticleList : Model -> Html Msg
-viewArticleList model =
+viewArticleList : List Article -> Article -> Int -> Bool -> Html Msg
+viewArticleList articles currentArticle shortListSize isFullyExpanded  =
   let
       maybeExpander : Bool -> Int -> List (Html Msg)
       maybeExpander isFullyExpanded nbOfArticles =
         let
           expander =
-            case (isFullyExpanded, (nbOfArticles > model.shortListSize)) of
+            case (isFullyExpanded, (nbOfArticles > shortListSize)) of
               (False, True) ->
                 Just
                   (p
@@ -97,19 +96,19 @@ viewArticleList model =
 
 
       shortList =
-        if model.isFullyExpanded
-        then (Articles.articlesDesc model.articles)
-        else model.articles |> Articles.articlesDesc |> List.take model.shortListSize
+        if isFullyExpanded
+        then (Articles.articlesDesc articles)
+        else articles |> Articles.articlesDesc |> List.take shortListSize
 
-      articleListSize = List.length model.articles
+      articleListSize = List.length articles
 
   in
     div
       [ class "sidebar-module" ]
       ([
         h4 [] [ text "Articles" ]
-      , (articleAsList shortList model.currentArticle)
-      ] ++ (maybeExpander model.isFullyExpanded articleListSize))
+      , (articleAsList shortList currentArticle)
+      ] ++ (maybeExpander isFullyExpanded articleListSize))
 
 
 viewContact : Html Msg
@@ -124,12 +123,12 @@ viewContact =
       (List.map linkAsLi [("https://twitter.com/mmenestret", "Twitter"), ("https://github.com/mmenestret", "GitHub")])
     ]
 
-viewRightPanel : Model -> Html Msg
-viewRightPanel m =
+viewRightPanel : List Article -> Article -> Int -> Bool -> Html Msg
+viewRightPanel articles currentArticle shortListSize isFullyExpanded =
   div
     [ class "col-sm-3 col-sm-offset-1 blog-sidebar" ]
     [
       viewAbout
-    , viewArticleList m
+    , viewArticleList articles currentArticle shortListSize isFullyExpanded
     , viewContact
     ]

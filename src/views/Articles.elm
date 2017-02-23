@@ -7,7 +7,6 @@ import Markdown exposing(..)
 
 import Article exposing (..)
 import Msg exposing (..)
-import Model exposing (..)
 
 getArticles : List Article
 getArticles =
@@ -62,8 +61,8 @@ isAfterShortList : List Article -> Int -> Article -> Bool
 isAfterShortList articles shortListSize currentArticle =
  not (articles |> articlesDesc |> (List.take shortListSize) |> (List.member currentArticle))
 
-pager : Model -> Html Msg
-pager model =
+pager : Html Msg
+pager =
     nav
       []
       [ ul
@@ -85,18 +84,18 @@ pager model =
         ]
       ]
 
-viewArticle : Model -> Html Msg
-viewArticle model =
+viewArticle : Article -> Html Msg
+viewArticle currentArticle =
     div
       [ class "col-sm-8 blog-main" ]
       [ div
         [ class "blog-post" ]
         [ h2
           [ class "blog-post-title" ]
-          [ text model.currentArticle.title ]
+          [ text currentArticle.title ]
         , p
           [ class "blog-post-meta" ]
-          [ text model.currentArticle.date]
-        , (Markdown.toHtmlWith { defaultOptions | sanitize = True } [] model.currentArticle.content)
-        , pager model
+          [ text currentArticle.date]
+        , (Markdown.toHtmlWith { defaultOptions | sanitize = True } [] currentArticle.content)
+        , pager
         ]]
