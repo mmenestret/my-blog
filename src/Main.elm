@@ -45,7 +45,7 @@ errorMapper e = toString e
 getArticlesMeta : Cmd Msg
 getArticlesMeta =
   let
-    url = "https://raw.githubusercontent.com/mmenestret/my-blog/master/src/ressources/articles/article1.md"
+    url = "https://raw.githubusercontent.com/mmenestret/my-blog/master/src/ressources/articles/articles_meta.json"
   in
     Http.send GetArticlesMeta (Http.getString url)
 
